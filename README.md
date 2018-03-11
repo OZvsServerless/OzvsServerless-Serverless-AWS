@@ -1,29 +1,24 @@
-# aws-cf-createApprovalEntry
-This codebase is created to experiment with AWS Lambda. The goal is to use SAM to deploy and publish the lambda function using Cloud formation.
+# sf-cf-createApprovalEntry
+This codebase is created to experiment with Serverless framework. I have created a sample AWS app using Serverless.
 
 ## Setup
 - Setup AWS CLI (details see https://docs.aws.amazon.com/lambda/latest/dg/setup-awscli.html)
-- Setup SAM Local (details see https://docs.aws.amazon.com/lambda/latest/dg/sam-cli-requirements.html)
 - Install NodeJS and NPM
+- Setup Serverless (details see https://serverless.com/framework/docs/providers/aws/guide/quick-start/)
 - Clone the repo
 - Run "npm install"
 
-## Package
-Run the following command to package the local artifacts (defined in template.yaml file) and upload them to S3 bucket and create a new template file with references to S3 bucket.
-
-sam package --template-file template.yaml --s3-bucket mybucket --output-template-file output.yaml
-
 ## Deploy
-Run the following command to create and execute changeset as described in the cloud formation template (output.yaml).
+Run the following command to deploy the whole service.
 
-sam deploy --template-file ./output.yaml --stack-name mystack --capabilities CAPABILITY_IAM
+serverless deploy -v
+
+Much faster option is to use the following command (if you have modified the function only).
+
+serverless deploy hello -f hello
 
 ## Unit Tests
 Run "npm test" to execute unit tests
 
 ## Functional Tests
-Generate S3 event using:
-
-sam local generate-event s3 --bucket localTestBucket  --key test-key > event_file.json
-
-sam local invoke AddReviewDocumentToList -e event_file.json
+TODO:
